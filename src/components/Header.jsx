@@ -1,0 +1,14 @@
+import React from "react";
+
+const Header = () => {
+  return (
+    <div className="Header">
+      <h1>
+        {"The      "}
+        <br /> MW News Service
+      </h1>
+    </div>
+  );
+};
+
+export default Header;

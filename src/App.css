@@ -1,38 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&display=swap");
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: min-content min-content auto;
+  grid-template-areas: "header" "nav" "content";
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-family: Georgia;
+  margin: 0;
+}
+
+.Header {
+  background-color: #052962;
+  color: white;
+  font-weight: bolder;
+  font-family: "Bona Nova", serif;
+}
+.Header h1 {
+  text-align: right;
+  padding-right: 10px;
+}
+
+.Nav {
+  background-color: #052962;
+  color: white;
+  font-weight: bold;
+  font-family: "Bona Nova", serif;
+  font-size: 1.2em;
+  text-align: left;
+  border: 0.25px rgb(108, 116, 145) solid;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Nav a {
+  color: white;
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Nav__element {
+  border-left: 0.25px rgb(108, 116, 145) solid;
+
+  display: inline-block;
+  text-transform: capitalize;
+  padding: 5px 10px;
+}
+
+.Articles {
+  color: black;
+}
+.Articles__card {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: min-content;
+
+  border-top: rgb(199, 19, 19) 1.5px solid;
+  margin: 0.7em;
+  padding: 5px;
+  background-color: rgba(218, 216, 216, 0.4);
+  text-align: left;
+}
+
+.Articles__card p {
+  margin: 0;
+  line-height: 1.1em;
+  font-style: italic;
+  font-size: 0.8em;
+  color: rgba(90, 88, 88, 0.665);
+  margin: 0px 3px 0px 5px;
+}
+
+.Articles__topic {
+  display: inline-block;
+  font-weight: bold;
+  color: rgb(199, 19, 19);
+  text-transform: capitalize;
+}
+
+.Articles__img {
+  width: 32%;
+  object-fit: contain;
+  position: relative;
+  align-self: flex-start;
+}
+
+/* .Articles__info {
+  display: inline-block;
+  position: relative;
+  align-self: flex-start;
+  text-align: left;
+} */
+
+a {
+  text-decoration: none;
+  color: black;
+}
+li {
+  list-style-type: none;
+}
+
+h3 {
+  margin: 0px 3px 5px 5px;
 }
