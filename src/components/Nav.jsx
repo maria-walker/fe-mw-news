@@ -21,10 +21,8 @@ const Nav = () => {
       </span>
       {topics.map((topic) => {
         return (
-          <span className="Nav__element">
-            <Link to={`/articles/${topic.slug}`} key={topic.slug}>
-              {topic.slug}
-            </Link>
+          <span key={topic.slug} className="Nav__element">
+            <Link to={`/articles/${topic.slug}`}>{topic.slug}</Link>
           </span>
         );
       })}

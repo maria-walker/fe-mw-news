@@ -17,3 +17,10 @@ export const getArticles = async (topic) => {
   });
   return data.articles;
 };
+
+export const getArticleById = async (article_id) => {
+  const { data } = await newsApi.get(`/articles/${article_id}`);
+  console.log(data.article);
+
+  return data.article;
+};
