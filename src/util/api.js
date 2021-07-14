@@ -13,6 +13,8 @@ export const getArticles = async (topic) => {
   const { data } = await newsApi.get("/articles", {
     params: {
       topic: topic,
+      sort_by: "created_at",
+      order: "desc",
     },
   });
   return data.articles;
@@ -23,4 +25,10 @@ export const getArticleById = async (article_id) => {
   console.log(data.article);
 
   return data.article;
+};
+
+export const getCommentsByArticleId = async (article_id) => {
+  const { data } = await newsApi.get(`/articles/${article_id}/comments`);
+
+  return data.comments;
 };

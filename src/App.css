@@ -80,6 +80,14 @@
   text-align: left;
 }
 
+.Articles h2 {
+  text-transform: capitalize;
+  margin: 3px 12px 0px;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
 .Articles img {
   width: 32%;
   object-fit: contain;
@@ -137,7 +145,7 @@
 .Article p {
   text-align: left;
   margin-left: 5px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.25px;
 }
 
 .Article__info {
@@ -146,6 +154,39 @@
   font-size: 0.9em;
   color: rgba(90, 88, 88, 0.87);
   margin: 0px 3px 0px 5px;
+}
+
+.Comments__card {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: min-content;
+
+  border-top: rgba(218, 216, 216, 0.6) 1px solid;
+  margin: 0.4em;
+  padding: 5px;
+  background-color: rgba(218, 216, 216, 0.1);
+  text-align: left;
+}
+
+.Comments__card p {
+  margin: 0;
+  line-height: 1.1em;
+  font-style: italic;
+  font-size: 0.8em;
+  color: rgba(90, 88, 88, 0.665);
+  margin: 0px 3px 10px 5px;
+}
+
+.Comments__button {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: #052962;
+  color: white;
+  font-size: 2.2em;
+  padding: 0px;
+  float: left;
 }
 
 .line {

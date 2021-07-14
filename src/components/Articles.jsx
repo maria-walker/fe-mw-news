@@ -17,6 +17,7 @@ const Articles = () => {
 
   return (
     <div className="Articles">
+      {topic ? <h2>{topic}</h2> : <p></p>}
       {articles.map((article) => {
         return (
           <li key={article.article_id}>

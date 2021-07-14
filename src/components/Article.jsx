@@ -1,12 +1,12 @@
 import { Link, useParams } from "react-router-dom";
-import { getArticleById } from "../util/api";
+import { getTopics, getArticleById, getCommentsByArticleId } from "../util/api";
 import { useEffect, useState } from "react";
-import { getTopics } from "../util/api";
 
 const Article = () => {
   const [article, setArticle] = useState({});
   const { article_id } = useParams();
   const [topics, setTopics] = useState([]);
+  const [comments, setComments] = useState([]);
 
   console.log(article_id);
 
@@ -19,9 +19,15 @@ const Article = () => {
   useEffect(() => {
     getArticleById(article_id).then((articleFromApi) => {
       setArticle(articleFromApi);
-      console.log(article);
     });
   }, [article_id]);
+
+  useEffect(() => {
+    getCommentsByArticleId(article_id).then((commentsFromApi) => {
+      setComments(commentsFromApi);
+    });
+  }, [article_id]);
+
   return (
     <div className="Article">
       <img
@@ -76,6 +82,36 @@ const Article = () => {
       </h3>
 
       <h2>comments ({article.comment_count})</h2>
+
+      <Expandable>
+        {comments.map((comment) => {
+          return (
+            <li key={comment.comment_id} className="Comments__card">
+              <div>
+                <h3>{comment.author}</h3>
+                <p>{comment.created_at.slice(0, 10)}</p>
+                <p>{comment.body}</p>
+                <p>Votes: {comment.votes}</p>
+              </div>
+            </li>
+          );
+        })}
+      </Expandable>
+    </div>
+  );
+};
+
+const Expandable = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleIsOpen = () => {
+    setIsOpen((currOpen) => !currOpen);
+  };
+  return (
+    <div>
+      <button className="Comments__button" onClick={toggleIsOpen}>
+        {isOpen ? "-" : "+"}
+      </button>
+      <div>{isOpen ? children : null}</div>
     </div>
   );
 };
