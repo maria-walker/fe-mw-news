@@ -1,12 +1,20 @@
 import { Link, useParams } from "react-router-dom";
 import { getArticleById } from "../util/api";
 import { useEffect, useState } from "react";
+import { getTopics } from "../util/api";
 
 const Article = () => {
   const [article, setArticle] = useState({});
   const { article_id } = useParams();
+  const [topics, setTopics] = useState([]);
 
   console.log(article_id);
+
+  useEffect(() => {
+    getTopics().then((topicsFromApi) => {
+      setTopics(topicsFromApi);
+    });
+  }, []);
 
   useEffect(() => {
     getArticleById(article_id).then((articleFromApi) => {
@@ -15,9 +23,8 @@ const Article = () => {
     });
   }, [article_id]);
   return (
-    <div>
+    <div className="Article">
       <img
-        className="Articles__img"
         src={
           article.topic === "football"
             ? "https://i.guim.co.uk/img/media/39b7e2c16abf0af92ff346d21cebcbf039a61ffb/0_208_5076_3045/master/5076.jpg?width=620&quality=85&auto=format&fit=max&s=8b12763b585cbedfdf9a210a30e366c2"
@@ -27,18 +34,48 @@ const Article = () => {
         }
         alt="article thumb"
       />
-      <h2>{article.topic}</h2>
+      <h3>{article.topic}</h3>
       <h1>{article.title}</h1>
+
+      <h2>
+        {" "}
+        {article.body && article.body.slice(0, article.body.indexOf("."))}
+      </h2>
+
+      <div className="line" />
+      <div className="line" />
+      <div className="line" />
+      <div className="line" />
 
       <h3>
         {article.author} <span>{article.topic} correspondent</span>{" "}
       </h3>
 
-      <p>
+      <p className="Article__info">
+        🐦@{article.author}
+        <br />
         Published on {article.created_at && article.created_at.slice(0, 10)}
       </p>
+      <div className="line" />
 
       <p>{article.body}</p>
+      <div className="line" />
+      <div className="line" />
+      <div className="line" />
+      <div className="line" />
+      <p className="Article__info">Topics </p>
+      <h3>{article.topic}</h3>
+      <h3>
+        {topics.map((topic) => {
+          return (
+            <span key={topic.slug}>
+              <Link to={`/articles/${topic.slug}`}>{topic.slug} / </Link>
+            </span>
+          );
+        })}
+      </h3>
+
+      <h2>comments ({article.comment_count})</h2>
     </div>
   );
 };

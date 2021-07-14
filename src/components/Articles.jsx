@@ -25,7 +25,6 @@ const Articles = () => {
               to={`/article/${article.article_id}`}
             >
               <img
-                className="Articles__img"
                 src={
                   article.topic === "football"
                     ? "https://i.guim.co.uk/img/media/39b7e2c16abf0af92ff346d21cebcbf039a61ffb/0_208_5076_3045/master/5076.jpg?width=620&quality=85&auto=format&fit=max&s=8b12763b585cbedfdf9a210a30e366c2"
@@ -35,7 +34,7 @@ const Articles = () => {
                 }
                 alt="article thumb"
               />
-              <div className="Articles__info">
+              <div>
                 <h3>
                   {" "}
                   <span className="Articles__topic">
