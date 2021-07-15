@@ -9,8 +9,18 @@
     grid-template-rows: min-content min-content auto;
     grid-template-areas: "header header header" "nav nav nav" "content content content";
     min-height: 100vh;
+
     font-family: Georgia;
     margin: 0;
+  }
+
+  .Header {
+    font-size: 2em;
+    line-height: 1.5em;
+  }
+
+  .Header h1 {
+    margin-right: 10%;
   }
 
   .Articles {
@@ -62,6 +72,49 @@
     object-fit: contain;
     position: relative;
     align-self: flex-start;
+  }
+
+  .Article h1 {
+    margin: 0 17px;
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .Article h2 {
+    margin-left: 17px;
+    margin-right: 17px;
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  .Article h3 {
+    display: inline-block;
+    font-weight: bold;
+    color: rgb(199, 19, 19);
+    text-transform: capitalize;
+    text-align: left;
+  }
+
+  .Article h3 span {
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .Article h3 span a {
+    display: inline-block;
+    font-weight: 400;
+    color: rgb(199, 19, 19);
+    text-transform: capitalize;
+    text-align: left;
+    font-style: normal;
+  }
+
+  .Article p {
+    text-align: left;
+    margin-left: 17px;
+    margin-right: 17px;
+    letter-spacing: 0.25px;
   }
 }
 
@@ -204,13 +257,14 @@
 }
 
 .Article h1 {
-  margin: 0 5px;
+  margin: 0 7px;
   text-align: left;
   font-weight: 700;
   letter-spacing: -0.5px;
 }
 .Article h2 {
-  margin-left: 5px;
+  margin-left: 7px;
+  margin-right: 7px;
   text-align: left;
   font-weight: 700;
   letter-spacing: -1px;
@@ -239,7 +293,8 @@
 }
 .Article p {
   text-align: left;
-  margin-left: 5px;
+  margin-left: 7px;
+  margin-right: 7px;
   letter-spacing: 0.25px;
 }
 
