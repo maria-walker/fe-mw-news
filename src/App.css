@@ -131,6 +131,10 @@
     margin-right: 17px;
     letter-spacing: 0.25px;
   }
+
+  .Article img {
+    width: 80%;
+  }
 }
 
 .App {
@@ -268,8 +272,10 @@
 }
 .Article img {
   width: 100%;
-  object-fit: contain;
+  max-height: 300px;
+  object-fit: cover;
   position: relative;
+  margin: auto;
   align-self: flex-start;
 }
 

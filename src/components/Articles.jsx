@@ -1,18 +1,27 @@
 import React from "react";
 
 import { useState, useEffect } from "react";
-import { getArticles } from "../util/api";
+import { getArticles, getArticleById } from "../util/api";
 import { Link, useParams } from "react-router-dom";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
+  const [firstArticle, setFirstArticle] = useState("");
   const { topic } = useParams();
   console.log(topic);
 
   useEffect(() => {
-    getArticles(topic, "created_at").then((articlesFromApi) => {
-      setArticles(articlesFromApi);
-    });
+    getArticles(topic, "created_at")
+      .then((articlesFromApi) => {
+        console.log(articlesFromApi[0].article_id);
+        setArticles(articlesFromApi);
+
+        return getArticleById(articlesFromApi[0].article_id);
+      })
+      .then((firstArticleFromApi) => {
+        console.log(firstArticleFromApi);
+        setFirstArticle(firstArticleFromApi);
+      });
   }, [topic]);
 
   return (
@@ -48,6 +57,13 @@ const Articles = () => {
 
                   <p>by {article.author}</p>
                   <p>Published on {article.created_at.slice(0, 10)}</p>
+                  <h3 style={{ "font-weight": "400" }}>
+                    {firstArticle.body &&
+                      firstArticle.body.slice(
+                        0,
+                        firstArticle.body.indexOf(".")
+                      )}
+                  </h3>
                 </div>
               </Link>
               {"  "}
