@@ -7,7 +7,7 @@
     display: grid;
     grid-template-columns: 3 (33%);
     grid-template-rows: min-content min-content auto;
-    grid-template-areas: "header header header" "nav nav nav" "content content content";
+    grid-template-areas: "header header header" "nav nav nav" "firstarticle firstarticle content";
     min-height: 100vh;
 
     font-family: Georgia;
@@ -20,7 +20,7 @@
   }
 
   .Header h1 {
-    margin-right: 10%;
+    margin-right: 15%;
   }
 
   .Articles {
@@ -46,6 +46,11 @@
     text-align: left;
   }
 
+  .Articles {
+    width: 95%;
+    margin: auto;
+  }
+
   .Articles .Articles__card img {
     width: 40%;
     object-fit: contain;
@@ -54,8 +59,10 @@
   }
 
   .Articles .Articles__card--first {
+    grid-area: firstarticle;
+    margin: auto;
     min-height: 200px;
-    width: 95%;
+    width: 97%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -72,6 +79,17 @@
     object-fit: contain;
     position: relative;
     align-self: flex-start;
+  }
+
+  .Article {
+    width: 60%;
+    margin: auto;
+    border-left: 0.25px rgba(108, 116, 145, 0.4) solid;
+    border-right: 0.25px rgba(108, 116, 145, 0.4) solid;
+  }
+
+  .Article .Articles__img {
+    width: 50%;
   }
 
   .Article h1 {
@@ -329,7 +347,6 @@
 }
 
 .Comments__button {
-  display: block;
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -339,11 +356,16 @@
   font-size: 2.2em;
   padding: 0px;
   float: left;
+  margin-left: 7px;
 }
 
 .line {
   height: 3px;
   border-bottom: 0.25px solid rgba(90, 88, 88, 0.3);
+}
+
+#Comments-section {
+  display: inline-block;
 }
 
 a {

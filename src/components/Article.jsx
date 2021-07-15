@@ -93,7 +93,7 @@ const Article = () => {
         })}
       </h3>
 
-      <h2>comments ({article.comment_count})</h2>
+      <h2 id="Comments-section">comments ({article.comment_count})</h2>
 
       <Expandable>
         {comments.map((comment) => {
@@ -110,7 +110,7 @@ const Article = () => {
         })}
       </Expandable>
 
-      <h2>Most popular (by number of comments)</h2>
+      <h2>Most popular articles (by number of comments)</h2>
 
       {articles.map((article) => {
         return (
