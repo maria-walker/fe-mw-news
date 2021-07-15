@@ -9,11 +9,11 @@ export const getTopics = async () => {
   return data.topics;
 };
 
-export const getArticles = async (topic) => {
+export const getArticles = async (topic, sort_by) => {
   const { data } = await newsApi.get("/articles", {
     params: {
       topic: topic,
-      sort_by: "created_at",
+      sort_by: sort_by,
       order: "desc",
     },
   });

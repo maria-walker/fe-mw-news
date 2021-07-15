@@ -1,5 +1,70 @@
 @import url("https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&display=swap");
 
+@media only screen and (min-width: 600px) {
+  .App {
+    text-align: center;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 3 (33%);
+    grid-template-rows: min-content min-content auto;
+    grid-template-areas: "header header header" "nav nav nav" "content content content";
+    min-height: 100vh;
+    font-family: Georgia;
+    margin: 0;
+  }
+
+  .Articles {
+    color: black;
+    grid-area: content;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .Articles .Articles__card {
+    min-height: 120px;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    border-top: rgb(199, 19, 19) 1.5px solid;
+    margin: 0.7em;
+    padding: 5px;
+    background-color: rgba(218, 216, 216, 0.4);
+    text-align: left;
+  }
+
+  .Articles .Articles__card img {
+    width: 40%;
+    object-fit: contain;
+    position: relative;
+    align-self: flex-start;
+  }
+
+  .Articles .Articles__card--first {
+    min-height: 200px;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    border-top: rgb(199, 19, 19) 1.5px solid;
+    margin: 0.7em;
+    padding: 5px;
+    background-color: rgba(218, 216, 216, 0.4);
+    text-align: left;
+  }
+
+  .Articles .Articles__card--first img {
+    width: 50%;
+    object-fit: contain;
+    position: relative;
+    align-self: flex-start;
+  }
+}
+
 .App {
   text-align: center;
   background-color: white;
@@ -63,13 +128,35 @@
   text-align: left;
 }
 
-.Articles__card p {
+.Articles .Articles__card--first {
+  min-height: 140px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  border-top: rgb(199, 19, 19) 1.5px solid;
+  margin: 0.7em;
+  padding: 5px 0 5px 0;
+  background-color: rgba(218, 216, 216, 0.4);
+  text-align: left;
+}
+
+.Articles__card p,
+.Articles__card--first p {
   margin: 0;
   line-height: 1.1em;
   font-style: italic;
   font-size: 0.8em;
   color: rgba(90, 88, 88, 0.665);
   margin: 0px 3px 0px 5px;
+}
+
+.Articles .Articles__card--first img {
+  width: 52%;
+  object-fit: contain;
+  position: relative;
+  align-self: flex-start;
 }
 
 .Articles__topic {
@@ -81,6 +168,7 @@
 }
 
 .Articles h2 {
+  display: block;
   text-transform: capitalize;
   margin: 3px 12px 0px;
   text-align: left;
@@ -89,6 +177,13 @@
 }
 
 .Articles img {
+  width: 32%;
+  object-fit: contain;
+  position: relative;
+  align-self: flex-start;
+}
+
+.Articles__card .Articles__img {
   width: 32%;
   object-fit: contain;
   position: relative;
@@ -158,7 +253,7 @@
 
 .Comments__card {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   height: min-content;
 
@@ -179,9 +274,11 @@
 }
 
 .Comments__button {
+  display: block;
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  border: none;
   background-color: #052962;
   color: white;
   font-size: 2.2em;

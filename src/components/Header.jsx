@@ -4,8 +4,7 @@ const Header = () => {
   return (
     <div className="Header">
       <h1>
-        {"The      "}
-        <br /> MW News Service
+        Not The <br /> Guardian
       </h1>
     </div>
   );
