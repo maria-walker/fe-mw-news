@@ -4,8 +4,10 @@ import {
   getArticleById,
   getArticles,
   getCommentsByArticleId,
+  postComment,
 } from "../util/api";
 import { useEffect, useState } from "react";
+import Expandable from "./Expandable";
 
 const Article = () => {
   const [article, setArticle] = useState({});
@@ -13,6 +15,7 @@ const Article = () => {
   const { article_id } = useParams();
   const [topics, setTopics] = useState([]);
   const [comments, setComments] = useState([]);
+  const [newCommentBody, setCommentBody] = useState("");
 
   console.log(article_id);
 
@@ -39,6 +42,21 @@ const Article = () => {
       setArticles(articlesFromApi.slice(0, 10));
     });
   }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newComment = {
+      username: "jessjelly",
+      body: newCommentBody,
+    };
+    postComment(article_id, newComment).then((newComment) => {
+      console.log(newComment);
+      setComments((currComments) => {
+        const newComments = [newComment, ...currComments];
+        return newComments;
+      });
+    });
+  };
 
   return (
     <div className="Article">
@@ -96,6 +114,22 @@ const Article = () => {
       <h2 id="Comments-section">comments ({article.comment_count})</h2>
 
       <Expandable>
+        <form onSubmit={handleSubmit}>
+          <textarea
+            value={newCommentBody}
+            onChange={(event) => setCommentBody(event.target.value)}
+            placeholder="Join the discussion"
+            name="commentBody"
+            id="commentBody"
+            cols="30"
+            rows="3"
+          ></textarea>
+          <br />
+          <button className="Comments__post-button">Post your comment</button>
+        </form>
+        <br />
+        <br />
+        <br />
         {comments.map((comment) => {
           return (
             <li key={comment.comment_id} className="Comments__card">
@@ -103,7 +137,7 @@ const Article = () => {
                 <h3>{comment.author}</h3>
                 <p>{comment.created_at.slice(0, 10)}</p>
                 <p>{comment.body}</p>
-                <p>Votes: {comment.votes}</p>
+                <p>Votes: {comment.votes || 0}</p>
               </div>
             </li>
           );
@@ -114,12 +148,9 @@ const Article = () => {
 
       {articles.map((article) => {
         return (
-          <div>
-            <li key={article.article_id}>
-              <Link
-                className="Articles__card"
-                to={`/article/${article.article_id}`}
-              >
+          <li key={article.article_id}>
+            <Link to={`/article/${article.article_id}`}>
+              <div className="Articles__card">
                 <h1>#{articles.indexOf(article) + 1}</h1>
                 <img
                   className="Articles__img"
@@ -145,31 +176,13 @@ const Article = () => {
                   <p>Published on {article.created_at.slice(0, 10)}</p>
                   <p>Comments({article.comment_count})</p>
                 </div>
-              </Link>
-            </li>
-          </div>
+              </div>
+            </Link>
+          </li>
         );
       })}
     </div>
   );
 };
 
-const Expandable = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleIsOpen = () => {
-    setIsOpen((currOpen) => !currOpen);
-  };
-  return (
-    <div>
-      <button className="Comments__button" onClick={toggleIsOpen}>
-        {isOpen ? "-" : "+"}
-      </button>
-      <br />
-      <br />
-      <br />
-
-      <div>{isOpen ? children : null}</div>
-    </div>
-  );
-};
 export default Article;
