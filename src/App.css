@@ -420,6 +420,9 @@
   margin: 0px 17px 20px 3%;
   font-weight: bold;
 }
+.Comments__post-button:disabled {
+  background-color: rgba(90, 88, 88, 0.665);
+}
 
 .line {
   height: 3px;

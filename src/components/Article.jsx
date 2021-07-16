@@ -118,7 +118,10 @@ const Article = () => {
       <h2 id="Comments-section">comments ({article.comment_count})</h2>
 
       <Expandable>
-        <br /> <p>{user ? <p>👤 {user}</p> : <p>👤 Please login</p>}</p>
+        <br />{" "}
+        <p>
+          {user ? <p>👤 {user}</p> : <p>👤 Please login to post a comment</p>}
+        </p>
         <form onSubmit={handleSubmit}>
           <textarea
             value={newCommentBody}
@@ -130,7 +133,9 @@ const Article = () => {
             rows="3"
           ></textarea>
           <br />
-          <button className="Comments__post-button">Post your comment</button>
+          <button disabled={!user} className="Comments__post-button">
+            {user ? "Post your comment" : "Please login first"}
+          </button>
         </form>
         <br />
         <br />
