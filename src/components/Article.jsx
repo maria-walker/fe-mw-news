@@ -6,10 +6,14 @@ import {
   getCommentsByArticleId,
   postComment,
 } from "../util/api";
-import { useEffect, useState } from "react";
+
+import { useState, useEffect, useContext } from "react";
+
+import { UserContext } from "../contexts/User.js";
 import Expandable from "./Expandable";
 
 const Article = () => {
+  const { user } = useContext(UserContext);
   const [article, setArticle] = useState({});
   const [articles, setArticles] = useState([]);
   const { article_id } = useParams();
@@ -46,7 +50,7 @@ const Article = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newComment = {
-      username: "jessjelly",
+      username: user,
       body: newCommentBody,
     };
     postComment(article_id, newComment).then((newComment) => {
@@ -114,6 +118,7 @@ const Article = () => {
       <h2 id="Comments-section">comments ({article.comment_count})</h2>
 
       <Expandable>
+        <br /> <p>{user ? <p>👤 {user}</p> : <p>👤 Please login</p>}</p>
         <form onSubmit={handleSubmit}>
           <textarea
             value={newCommentBody}
