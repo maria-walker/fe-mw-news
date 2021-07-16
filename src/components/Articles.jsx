@@ -61,7 +61,7 @@ const Articles = () => {
                     {firstArticle.body &&
                       firstArticle.body.slice(
                         0,
-                        firstArticle.body.indexOf(".")
+                        firstArticle.body.indexOf(". ")
                       )}
                   </h3>
                 </div>

@@ -75,7 +75,7 @@ const Article = () => {
 
       <h2>
         {" "}
-        {article.body && article.body.slice(0, article.body.indexOf("."))}
+        {article.body && article.body.slice(0, article.body.indexOf(". "))}
       </h2>
 
       <div className="line" />
@@ -130,18 +130,20 @@ const Article = () => {
         <br />
         <br />
         <br />
-        {comments.map((comment) => {
-          return (
-            <li key={comment.comment_id} className="Comments__card">
-              <div>
-                <h3>{comment.author}</h3>
-                <p>{comment.created_at.slice(0, 10)}</p>
-                <p>{comment.body}</p>
-                <p>Votes: {comment.votes || 0}</p>
-              </div>
-            </li>
-          );
-        })}
+        {comments
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .map((comment) => {
+            return (
+              <li key={comment.comment_id} className="Comments__card">
+                <div>
+                  <h3>{comment.author}</h3>
+                  <p>{comment.created_at.slice(0, 10)}</p>
+                  <p>{comment.body}</p>
+                  <p>Votes: {comment.votes || 0}</p>
+                </div>
+              </li>
+            );
+          })}
       </Expandable>
 
       <h2>Most popular articles (by number of comments)</h2>
