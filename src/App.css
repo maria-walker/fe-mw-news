@@ -428,21 +428,21 @@
   color: white;
   font-weight: bold;
   font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 1.2em;
+  font-size: 1.4em;
   text-align: left;
 }
 
 .Error__button {
   height: 50px;
-  width: 450px;
+  max-width: 465px;
   border-radius: 25px;
   border: none;
   color: #052962;
   background-color: white;
-  font-size: 1.2em;
+  font-size: 1em;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
-  padding: 0px;
+  padding: 7px;
   float: left;
   margin-left: 7px;
 }

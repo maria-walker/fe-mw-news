@@ -10,6 +10,7 @@ const Articles = () => {
   const [firstArticle, setFirstArticle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const { topic } = useParams();
+  const [topicError, setTopicError] = useState(false);
 
   useEffect(() => {
     getArticles(topic, "created_at")
@@ -17,6 +18,9 @@ const Articles = () => {
         setArticles(articlesFromApi);
 
         return getArticleById(articlesFromApi[0].article_id);
+      })
+      .catch((error) => {
+        setTopicError(true);
       })
       .then((firstArticleFromApi) => {
         setFirstArticle(firstArticleFromApi);
@@ -28,6 +32,18 @@ const Articles = () => {
     <h1>
       <FontAwesomeIcon icon={faSpinner} pulse />
     </h1>
+  ) : topicError ? (
+    <div className="Error">
+      <h1 style={{ fontSize: "3em" }}>Error 404</h1>
+      <h1>
+        You have tried accessing a non-existent topic, please check the URL.
+      </h1>
+      <Link to="/">
+        <button className="Error__button">
+          Return to Not-The-Guardian homepage
+        </button>
+      </Link>
+    </div>
   ) : (
     <div>
       <div className="Articles">{topic ? <h2>{topic}</h2> : <p></p>}</div>
