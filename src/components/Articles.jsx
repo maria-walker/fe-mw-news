@@ -1,13 +1,14 @@
 import React from "react";
-
 import { useState, useEffect } from "react";
-
 import { getArticles, getArticleById } from "../util/api";
 import { Link, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [firstArticle, setFirstArticle] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const { topic } = useParams();
 
   useEffect(() => {
@@ -19,10 +20,15 @@ const Articles = () => {
       })
       .then((firstArticleFromApi) => {
         setFirstArticle(firstArticleFromApi);
+        setIsLoading(false);
       });
   }, [topic]);
 
-  return (
+  return isLoading ? (
+    <h1>
+      <FontAwesomeIcon icon={faSpinner} pulse />
+    </h1>
+  ) : (
     <div>
       <div className="Articles">{topic ? <h2>{topic}</h2> : <p></p>}</div>
 
