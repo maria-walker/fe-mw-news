@@ -32,6 +32,14 @@ The website accesses and dinamically renders data from [mw-news-api](https://git
 
 - Node.js - version v15 and above
 
+## Instructions
+
+1. Clone the repository [github.com/maria-walker/fe-mw-news](https://github.com/maria-walker/fe-mw-news):
+   `git clone <https://github.com/maria-walker/fe-mw-news.git>`
+
+2. Navigate to the project directory:
+   `cd fe-mw-news`
+
 ## Available Scripts
 
 In the project directory, you can run:
