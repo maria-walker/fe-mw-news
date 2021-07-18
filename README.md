@@ -1,6 +1,32 @@
-# Getting Started with Create React App
+# Not-The-Guardian Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project summary
+
+A responsive news service website built from scratch with mobile-first approach, using HTML, CSS and create-react-app, in the style inspired by The Guardian Website.
+
+The website accesses and dinamically renders data from [mw-news-api](https://github.com/maria-walker/mw-news-api) - an API data server built with Express.js. Hosted version - [mw-news.herokuapp.com/api/](https://mw-news.herokuapp.com/api/)
+
+## Hoisted verion URL
+
+[not-the-guardian.netlify.app](https://not-the-guardian.netlify.app/)
+
+## App features
+
+- Home page (News page)
+
+  - displays available topics dynamically rendered from API, as links to relevant topic pages.
+  - displays a list of all articles available on the API, sorted by the latest one. For each article, the topic, article title, publication date and author are taken from the API, while the image is chosen based on the article topic. For the first article on the list, the blurb is also displayed (the first sentence from the article body).
+  - a basic login functionality - a user is selected from a drop-down list and once 'login' button is clicked, the user value is passed to all components with useContext - important for comments functionality on the individual article page.
+
+- Topic pages
+
+  - display all articles available for a particular topic, in the same style as the home page.
+
+- Individual article pages
+
+  - display the topic, article title, the blurb (the first sentence from the article body), publication date, author and article body, taken from the API. The image is chosen based on the article topic.
+  - Expandable Comments section diplays comments sorted by date (latest first). User must log in to be able to post a comment, otherwise the post button is disabled. Newly posted comment is displayed at the top of the list.
+  - Top 10 most popular articles section displays 10 artices with the current highest number of comments.
 
 ## Available Scripts
 

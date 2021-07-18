@@ -11,6 +11,8 @@ import { useState, useEffect, useContext } from "react";
 
 import { UserContext } from "../contexts/User.js";
 import Expandable from "./Expandable";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const Article = () => {
   const { user } = useContext(UserContext);
@@ -92,7 +94,7 @@ const Article = () => {
       </h3>
 
       <p className="Article__info">
-        🐦@{article.author}
+        <FontAwesomeIcon icon={faTwitter} />@{article.author}
         <br />
         Published on {article.created_at && article.created_at.slice(0, 10)}
       </p>
@@ -161,9 +163,18 @@ const Article = () => {
       {articles.map((article) => {
         return (
           <li key={article.article_id}>
-            <Link to={`/article/${article.article_id}`}>
+            <Link
+              to={`/article/${article.article_id}`}
+              onClick={window.scrollTo({
+                top: 10,
+                left: 10,
+                behavior: "smooth",
+              })}
+            >
               <div className="Articles__card">
-                <h1>#{articles.indexOf(article) + 1}</h1>
+                <h1 style={{ "font-size": "1.8em", width: "6%" }}>
+                  #{articles.indexOf(article) + 1}
+                </h1>
                 <img
                   className="Articles__img"
                   src={
@@ -175,7 +186,7 @@ const Article = () => {
                   }
                   alt="article thumb"
                 />
-                <div>
+                <div style={{ width: "52%" }}>
                   <h3>
                     {" "}
                     <span className="Articles__topic">

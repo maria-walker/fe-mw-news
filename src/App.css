@@ -14,7 +14,7 @@
     margin: 0;
   }
 
-  .Heading {
+  #Heading {
     grid-area: heading;
   }
 
@@ -27,10 +27,10 @@
     justify-content: space-between;
   }
 
-  .Header h1 {
-    padding-right: 10%;
-    font-size: 3em;
-    line-height: 0.7em;
+  .Header a h1 {
+    padding-right: 10% !important;
+    font-size: 3em !important;
+    line-height: 0.7em !important;
   }
 
   .Articles {
@@ -429,6 +429,10 @@
   border-bottom: 0.25px solid rgba(90, 88, 88, 0.3);
 }
 
+#popular {
+  width: 200px;
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -445,6 +449,10 @@ textarea {
   width: 92%;
   border: 0.25px solid rgba(90, 88, 88, 0.3);
   margin: 20px 2.5% 7px;
+}
+
+select {
+  margin: 0px 2px 3px 7px;
 }
 
 :placeholder-shown {

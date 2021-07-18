@@ -1,7 +1,11 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
+import { Link } from "react-router-dom";
 import * as users from "../data/users";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
@@ -15,6 +19,18 @@ const Header = () => {
   return (
     <div className="Header">
       <div className="User">
+        <p>
+          {user ? (
+            <p>
+              {" "}
+              <FontAwesomeIcon icon={faUserCircle} /> {user}
+            </p>
+          ) : (
+            <p>
+              <FontAwesomeIcon icon={faUserCircle} /> Sign in
+            </p>
+          )}
+        </p>
         <form onSubmit={handleLogin}>
           <select
             value={newUser}
@@ -27,13 +43,16 @@ const Header = () => {
               return <option value={user.username}>{user.username}</option>;
             })}
           </select>{" "}
-          <button>Login</button>
+          <button style={{ "border-radius": "7px", "border-style": "none" }}>
+            Login
+          </button>
         </form>
-        <p>{user ? <p>👤 {user}</p> : <p>👤 Please login</p>}</p>
       </div>
-      <h1 className="Heading">
-        Not The <br /> Guardian
-      </h1>
+      <Link to={`/`}>
+        <h1 style={{ color: "white" }} id="Heading">
+          Not The Guardian
+        </h1>
+      </Link>
     </div>
   );
 };
