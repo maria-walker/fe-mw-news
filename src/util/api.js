@@ -22,7 +22,6 @@ export const getArticles = async (topic, sort_by) => {
 
 export const getArticleById = async (article_id) => {
   const { data } = await newsApi.get(`/articles/${article_id}`);
-  console.log(data.article);
 
   return data.article;
 };

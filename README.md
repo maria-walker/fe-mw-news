@@ -6,7 +6,7 @@ A responsive news service website built from scratch with mobile-first approach,
 
 The website accesses and dinamically renders data from [mw-news-api](https://github.com/maria-walker/mw-news-api) - an API data server built with Express.js. Hosted version - [mw-news.herokuapp.com/api/](https://mw-news.herokuapp.com/api/)
 
-## Hoisted verion URL
+## Hosted verion URL
 
 [not-the-guardian.netlify.app](https://not-the-guardian.netlify.app/)
 
@@ -27,6 +27,10 @@ The website accesses and dinamically renders data from [mw-news-api](https://git
   - display the topic, article title, the blurb (the first sentence from the article body), publication date, author and article body, taken from the API. The image is chosen based on the article topic.
   - Expandable Comments section diplays comments sorted by date (latest first). User must log in to be able to post a comment, otherwise the post button is disabled. Newly posted comment is displayed at the top of the list.
   - Top 10 most popular articles section displays 10 artices with the current highest number of comments.
+
+## Environment requirements
+
+- Node.js - version v15 and above
 
 ## Available Scripts
 

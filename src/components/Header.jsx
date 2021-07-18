@@ -10,7 +10,6 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
   const [newUser, setNewUser] = useState("");
-  console.log(users);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -19,7 +18,7 @@ const Header = () => {
   return (
     <div className="Header">
       <div className="User">
-        <p>
+        <div>
           {user ? (
             <p>
               {" "}
@@ -30,20 +29,22 @@ const Header = () => {
               <FontAwesomeIcon icon={faUserCircle} /> Sign in
             </p>
           )}
-        </p>
+        </div>
         <form onSubmit={handleLogin}>
           <select
-            value={newUser}
+            defaultValue="Select user"
             onChange={(event) => setNewUser(event.currentTarget.value)}
           >
-            <option selected value="Select user">
-              Select user
-            </option>
+            <option key="Select user">Select user</option>
             {users.map((user) => {
-              return <option value={user.username}>{user.username}</option>;
+              return (
+                <option key={user.username} value={user.username}>
+                  {user.username}
+                </option>
+              );
             })}
           </select>{" "}
-          <button style={{ "border-radius": "7px", "border-style": "none" }}>
+          <button style={{ borderRadius: "7px", borderStyle: "none" }}>
             Login
           </button>
         </form>
