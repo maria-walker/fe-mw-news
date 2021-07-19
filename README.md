@@ -28,6 +28,14 @@ The website accesses and dinamically renders data from [mw-news-api](https://git
   - Expandable Comments section diplays comments sorted by date (latest first). User must log in to be able to post a comment, otherwise the post button is disabled. Newly posted comment is displayed at the top of the list.
   - Top 10 most popular articles section displays 10 artices with the current highest number of comments.
 
+## Error handling
+
+- error 404 message with link to the homepage for bad URLs;
+
+- error 404 message with link to the homepage for non-existent topic in the URL;
+
+- user warning if empty text area is being submitted as a comment.
+
 ## Environment requirements
 
 - Node.js - version v15 and above
@@ -80,29 +88,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

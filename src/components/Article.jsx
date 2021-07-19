@@ -24,6 +24,8 @@ const Article = () => {
   const [comments, setComments] = useState([]);
   const [newCommentBody, setCommentBody] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [commentError, setCommentError] = useState(false);
+
   useEffect(() => {
     getTopics().then((topicsFromApi) => {
       setTopics(topicsFromApi);
@@ -55,11 +57,17 @@ const Article = () => {
       username: user,
       body: newCommentBody,
     };
+    if (!newCommentBody) {
+      setCommentError(true);
+    }
     postComment(article_id, newComment).then((newComment) => {
       setComments((currComments) => {
         const newComments = [newComment, ...currComments];
         return newComments;
       });
+      // .catch(() => {
+      //   setCommentError(true);
+      // });
     });
   };
 
@@ -145,6 +153,11 @@ const Article = () => {
             {user ? "Post your comment" : "Please sign in first"}
           </button>
         </form>
+        {commentError ? (
+          <div>
+            <h3>Please enter your comment above.</h3>
+          </div>
+        ) : null}
         <br />
         <br />
         <br />

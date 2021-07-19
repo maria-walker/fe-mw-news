@@ -16,6 +16,7 @@ const Articles = () => {
     getArticles(topic, "created_at")
       .then((articlesFromApi) => {
         setArticles(articlesFromApi);
+        setTopicError(false);
 
         return getArticleById(articlesFromApi[0].article_id);
       })
