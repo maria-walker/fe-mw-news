@@ -26,6 +26,7 @@ The website accesses and dinamically renders data from [mw-news-api](https://git
 
   - display the topic, article title, the blurb (the first sentence from the article body), publication date, author and article body, taken from the API. The image is chosen based on the article topic.
   - Expandable Comments section diplays comments sorted by date (latest first). User must log in to be able to post a comment, otherwise the post button is disabled. Newly posted comment is displayed at the top of the list.
+  - Voting on an article content - user is allowed to cast one positive or one negative vote (thumbs up or thumbs down). One a vote has been ubmitted - the vote buttons are disabled and a message "You have already voted" is displayed.
   - Top 10 most popular articles section displays 10 artices with the current highest number of comments.
 
 ## Error handling

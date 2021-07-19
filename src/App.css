@@ -452,6 +452,21 @@
   border-bottom: 0.25px solid rgba(90, 88, 88, 0.3);
 }
 
+.Vote {
+  display: inline;
+  width: 35px;
+  height: 35px;
+  color: #052962;
+  background-color: white;
+  font-size: 1.5em;
+  margin: 3px;
+  border: none;
+}
+
+.Vote:disabled {
+  color: rgba(90, 88, 88, 0.5);
+}
+
 a {
   text-decoration: none;
   color: black;

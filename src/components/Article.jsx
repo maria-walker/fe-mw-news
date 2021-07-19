@@ -5,6 +5,7 @@ import {
   getArticles,
   getCommentsByArticleId,
   postComment,
+  patchVote,
 } from "../util/api";
 
 import { useState, useEffect, useContext } from "react";
@@ -13,7 +14,11 @@ import { UserContext } from "../contexts/User.js";
 import Expandable from "./Expandable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSpinner,
+  faThumbsDown,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Article = () => {
   const { user } = useContext(UserContext);
@@ -22,9 +27,11 @@ const Article = () => {
   const { article_id } = useParams();
   const [topics, setTopics] = useState([]);
   const [comments, setComments] = useState([]);
+  const [votes, setVotes] = useState("");
   const [newCommentBody, setCommentBody] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [commentError, setCommentError] = useState(false);
+  const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
     getTopics().then((topicsFromApi) => {
@@ -36,7 +43,7 @@ const Article = () => {
     getArticleById(article_id).then((articleFromApi) => {
       setArticle(articleFromApi);
     });
-  }, [article_id]);
+  }, [article_id, votes]);
 
   useEffect(() => {
     getCommentsByArticleId(article_id).then((commentsFromApi) => {
@@ -51,7 +58,7 @@ const Article = () => {
     });
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleCommentSubmit = (event) => {
     event.preventDefault();
     const newComment = {
       username: user,
@@ -69,6 +76,30 @@ const Article = () => {
       //   setCommentError(true);
       // });
     });
+  };
+
+  const handlePositiveVote = (event) => {
+    event.preventDefault();
+    if (!hasVoted) {
+      const vote = 1;
+      patchVote(article_id, vote).then((newVotes) => {
+        setVotes(newVotes);
+        setHasVoted(true);
+      });
+    }
+    return false;
+  };
+
+  const handleNegativeVote = (event) => {
+    event.preventDefault();
+    if (!hasVoted) {
+      const vote = -1;
+      patchVote(article_id, vote).then((newVotes) => {
+        setVotes(newVotes);
+        setHasVoted(true);
+      });
+    }
+    return false;
   };
 
   return isLoading ? (
@@ -111,8 +142,18 @@ const Article = () => {
         <FontAwesomeIcon icon={faTwitter} /> @{article.author}
         <br />
         Published on {article.created_at && article.created_at.slice(0, 10)}
+        <br />
+        Votes: {article.votes}
+        <br />
+        {hasVoted ? "You have already voted" : null}
       </p>
       <div className="line" />
+      <button className="Vote" disabled={hasVoted} onClick={handlePositiveVote}>
+        <FontAwesomeIcon icon={faThumbsUp} />
+      </button>
+      <button className="Vote" disabled={hasVoted} onClick={handleNegativeVote}>
+        <FontAwesomeIcon icon={faThumbsDown} />
+      </button>
 
       <p>{article.body}</p>
       <div className="line" />
@@ -138,7 +179,7 @@ const Article = () => {
         <div>
           {user ? <p>👤 {user}</p> : <p>👤 Please sign in to post a comment</p>}
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleCommentSubmit}>
           <textarea
             value={newCommentBody}
             onChange={(event) => setCommentBody(event.target.value)}
