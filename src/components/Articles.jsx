@@ -13,19 +13,20 @@ const Articles = () => {
   const [topicError, setTopicError] = useState(false);
 
   useEffect(() => {
+    setTopicError(false);
     getArticles(topic, "created_at")
       .then((articlesFromApi) => {
         setArticles(articlesFromApi);
-        setTopicError(false);
 
         return getArticleById(articlesFromApi[0].article_id);
-      })
-      .catch((error) => {
-        setTopicError(true);
       })
       .then((firstArticleFromApi) => {
         setFirstArticle(firstArticleFromApi);
         setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setTopicError(true);
       });
   }, [topic]);
 
@@ -50,8 +51,8 @@ const Articles = () => {
       <div className="Articles">{topic ? <h2>{topic}</h2> : <p></p>}</div>
 
       <div className="Articles">
-        {articles.map((article) => {
-          return articles.indexOf(article) === 0 ? (
+        {articles.map((article, index) => {
+          return index === 0 ? (
             <li key={article.article_id}>
               <Link
                 className="Articles__card--first"

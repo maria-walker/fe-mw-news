@@ -4,9 +4,9 @@
 
 A responsive news service website built from scratch with mobile-first approach, using HTML, CSS and create-react-app, in the style inspired by The Guardian Website.
 
-The website accesses and dinamically renders data from [mw-news-api](https://github.com/maria-walker/mw-news-api) - an API data server built with Express.js. Hosted version - [mw-news.herokuapp.com/api/](https://mw-news.herokuapp.com/api/)
+The website accesses and dynamically renders data from [mw-news-api](https://github.com/maria-walker/mw-news-api) - an API data server built with Express.js. Hosted version - [mw-news.herokuapp.com/api/](https://mw-news.herokuapp.com/api/)
 
-## Hosted verion URL
+## Hosted version URL
 
 [not-the-guardian.netlify.app](https://not-the-guardian.netlify.app/)
 
@@ -25,9 +25,9 @@ The website accesses and dinamically renders data from [mw-news-api](https://git
 - Individual article pages
 
   - display the topic, article title, the blurb (the first sentence from the article body), publication date, author and article body, taken from the API. The image is chosen based on the article topic.
-  - Expandable Comments section diplays comments sorted by date (latest first). User must log in to be able to post a comment, otherwise the post button is disabled. Newly posted comment is displayed at the top of the list.
-  - Voting on an article content - user is allowed to cast one positive or one negative vote (thumbs up or thumbs down). One a vote has been ubmitted - the vote buttons are disabled and a message "You have already voted" is displayed.
-  - Top 10 most popular articles section displays 10 artices with the current highest number of comments.
+  - Expandable Comments section displays comments sorted by date (latest first). User must log in to be able to post a comment, otherwise the post button takes user up to the top of the page for signing in. Newly posted comment is displayed at the top of the comments list.
+  - Voting on an article content - user is allowed to cast one positive or one negative vote (thumbs up or thumbs down). One a vote has been submitted - the vote buttons are disabled and a message "You have already voted" is displayed.
+  - Top 10 most popular articles section displays 10 articles with the current highest number of comments.
 
 ## Error handling
 
@@ -35,7 +35,9 @@ The website accesses and dinamically renders data from [mw-news-api](https://git
 
 - error 404 message with link to the homepage for non-existent topic in the URL;
 
-- user warning if empty text area is being submitted as a comment.
+- user warning if empty text area is being submitted as a comment;
+
+- user warning if another error is encountered on submitting comment - e.g. failed connection.
 
 ## Environment requirements
 

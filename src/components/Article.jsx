@@ -30,12 +30,15 @@ const Article = () => {
   const [votes, setVotes] = useState("");
   const [newCommentBody, setCommentBody] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [commentError, setCommentError] = useState(false);
+  const [commentError, setCommentError] = useState("");
   const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
     getTopics().then((topicsFromApi) => {
       setTopics(topicsFromApi);
+    });
+    getArticles("", "comment_count").then((articlesFromApi) => {
+      setArticles(articlesFromApi.slice(0, 10));
     });
   }, []);
 
@@ -52,12 +55,6 @@ const Article = () => {
     });
   }, [article_id]);
 
-  useEffect(() => {
-    getArticles("", "comment_count").then((articlesFromApi) => {
-      setArticles(articlesFromApi.slice(0, 10));
-    });
-  }, []);
-
   const handleCommentSubmit = (event) => {
     event.preventDefault();
     const newComment = {
@@ -65,41 +62,30 @@ const Article = () => {
       body: newCommentBody,
     };
     if (!newCommentBody) {
-      setCommentError(true);
+      setCommentError("Please enter your comment above");
+      return;
     }
-    postComment(article_id, newComment).then((newComment) => {
-      setComments((currComments) => {
-        const newComments = [newComment, ...currComments];
-        return newComments;
+    postComment(article_id, newComment)
+      .then((newComment) => {
+        setComments((currComments) => {
+          const newComments = [newComment, ...currComments];
+          return newComments;
+        });
+      })
+      .catch(() => {
+        setCommentError(
+          "Something went wrong... Please check your connection and try again"
+        );
       });
-      // .catch(() => {
-      //   setCommentError(true);
-      // });
-    });
   };
 
-  const handlePositiveVote = (event) => {
-    event.preventDefault();
+  const handleVote = (vote) => {
     if (!hasVoted) {
-      const vote = 1;
       patchVote(article_id, vote).then((newVotes) => {
         setVotes(newVotes);
         setHasVoted(true);
       });
     }
-    return false;
-  };
-
-  const handleNegativeVote = (event) => {
-    event.preventDefault();
-    if (!hasVoted) {
-      const vote = -1;
-      patchVote(article_id, vote).then((newVotes) => {
-        setVotes(newVotes);
-        setHasVoted(true);
-      });
-    }
-    return false;
   };
 
   return isLoading ? (
@@ -148,10 +134,22 @@ const Article = () => {
         {hasVoted ? "You have already voted" : null}
       </p>
       <div className="line" />
-      <button className="Vote" disabled={hasVoted} onClick={handlePositiveVote}>
+      <button
+        className="Vote"
+        disabled={hasVoted}
+        onClick={() => {
+          handleVote(1);
+        }}
+      >
         <FontAwesomeIcon icon={faThumbsUp} />
       </button>
-      <button className="Vote" disabled={hasVoted} onClick={handleNegativeVote}>
+      <button
+        className="Vote"
+        disabled={hasVoted}
+        onClick={() => {
+          handleVote(-1);
+        }}
+      >
         <FontAwesomeIcon icon={faThumbsDown} />
       </button>
 
@@ -179,7 +177,15 @@ const Article = () => {
         <div>
           {user ? <p>👤 {user}</p> : <p>👤 Please sign in to post a comment</p>}
         </div>
-        <form onSubmit={handleCommentSubmit}>
+        <form
+          onSubmit={
+            user
+              ? handleCommentSubmit
+              : (e) => {
+                  e.preventDefault();
+                }
+          }
+        >
           <textarea
             value={newCommentBody}
             onChange={(event) => setCommentBody(event.target.value)}
@@ -190,13 +196,26 @@ const Article = () => {
             rows="3"
           ></textarea>
           <br />
-          <button disabled={!user} className="Comments__post-button">
+          <button
+            onClick={
+              !user
+                ? () => {
+                    window.scrollTo({
+                      top: 1,
+                      left: 1,
+                      behavior: "smooth",
+                    });
+                  }
+                : null
+            }
+            className="Comments__post-button"
+          >
             {user ? "Post your comment" : "Please sign in first"}
           </button>
         </form>
         {commentError ? (
           <div>
-            <h3>Please enter your comment above.</h3>
+            <h3>{commentError}</h3>
           </div>
         ) : null}
         <br />
@@ -220,21 +239,21 @@ const Article = () => {
 
       <h2>Most popular articles (by number of comments)</h2>
 
-      {articles.map((article) => {
+      {articles.map((article, index) => {
         return (
           <li key={article.article_id}>
             <Link
               to={`/article/${article.article_id}`}
-              onClick={window.scrollTo({
-                top: 10,
-                left: 10,
-                behavior: "smooth",
-              })}
+              onClick={() => {
+                window.scrollTo({
+                  top: 10,
+                  left: 10,
+                  behavior: "smooth",
+                });
+              }}
             >
               <div className="Articles__card">
-                <h1 style={{ fontSize: "1.8em", width: "6%" }}>
-                  #{articles.indexOf(article) + 1}
-                </h1>
+                <h1 style={{ fontSize: "1.8em", width: "6%" }}>#{index + 1}</h1>
                 <img
                   className="Articles__img"
                   src={

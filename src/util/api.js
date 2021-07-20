@@ -45,6 +45,6 @@ export const patchVote = async (article_id, vote) => {
   const { data } = await newsApi.patch(`/articles/${article_id}`, {
     inc_votes: vote,
   });
-  console.log(data.votes);
+
   return data.votes;
 };
